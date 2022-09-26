@@ -14,7 +14,7 @@ export const Pages: FC = () => {
         <Route path="/" element={<Home />}></Route>
         <Route path="/product/:id" element={<ProductDetails />}></Route>
         <Route path="/favourite" element={<Favourite />}></Route>
-        <Route path="/add/product" element={<AddProduct/>}></Route>
+        <Route path="/add/product" element={<AddProduct />}></Route>
       </Routes>
     </div>
   );

@@ -1,33 +1,30 @@
 import { productI } from './productApiSlice';
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-type favouriteI={
-    favourite:productI[];
+type favouriteI = {
+    favourite: productI[];
 }
-const initialState:favouriteI={
-    favourite:[]
+const initialState: favouriteI = {
+    favourite: []
 }
 
-const favouriteSlice=createSlice({
-    name:'favourite',
+const favouriteSlice = createSlice({
+    name: 'favourite',
     initialState,
-    reducers:{
+    reducers: {
         //add to favourite
-        addFavourite:(state,action:PayloadAction<productI>)=>{
-            // if(state.favourite.find((ele) => ele._id === action.payload._id)){
-            
-            // }else{
+        addFavourite: (state, action: PayloadAction<productI>) => {
             state.favourite.push(action.payload)
-
-            // }
         },
-        removeFavourite:(state,action:PayloadAction<string>)=>{
-            state.favourite=state.favourite.filter((ele)=>{
-                return ele._id!==action.payload;
+
+        //remove favourite
+        removeFavourite: (state, action: PayloadAction<string>) => {
+            state.favourite = state.favourite.filter((ele) => {
+                return ele._id !== action.payload;
             })
         }
     }
 })
 
-export const {addFavourite,removeFavourite}=favouriteSlice.actions;
+export const { addFavourite, removeFavourite } = favouriteSlice.actions;
 export default favouriteSlice.reducer;

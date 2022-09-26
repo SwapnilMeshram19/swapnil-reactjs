@@ -7,35 +7,32 @@ import {
   removeFavourite,
 } from "../features/product/favouritSlice";
 
-
 export const ProductCard: FC<{ product: productI }> = ({ product }) => {
   const [available, setAvailable] = useState<boolean>(false);
   const favouriteProduct = useAppSelector((state) => state.favourite);
   const dispatch = useAppDispatch();
-  
 
   useEffect(() => {
     if (favouriteProduct) {
       if (favouriteProduct.favourite.find((ele) => ele._id === product._id)) {
         setAvailable(!available);
-        
       }
     }
-  },[]);
-
+  }, [favouriteProduct]);
+  // add to Favourite
   const handleAddFavourite = () => {
     dispatch(addFavourite(product));
-    window.location.reload();
   };
-  const handleRemoveFavourite=()=>{
-    dispatch(removeFavourite(product._id));
-    window.location.reload();
-    
-  }
 
-  console.log(favouriteProduct);
+  // remove from favourite
+  const handleRemoveFavourite = () => {
+    dispatch(removeFavourite(product._id));
+  };
+
   return (
+    
     <div className="group relative drop-shadow-lg">
+      {/* Product Card */}
       <Link to={`/product/${product._id}`}>
         <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-72 sm:h-72 md:h-40">
           <img
@@ -45,12 +42,16 @@ export const ProductCard: FC<{ product: productI }> = ({ product }) => {
           />
         </div>
         <div className="mt-4 flex pl-2 pr-2 justify-between">
-          <h3 className="text-sm text-gray-700">{product.name}</h3>
-          <p className="text-sm font-medium text-gray-900">
+          <h3 className="text-sm text-gray-700 w-1/2 text-left">
+            {product.name}
+          </h3>
+          <p className="text-sm font-medium text-gray-900 ">
             &#36; {product.price}
           </p>
         </div>
       </Link>
+
+      {/* Favourite Icon */}
       {available ? (
         <div
           className="rounded-full  border-gray-200 shadow-none absolute top-2 right-2"
