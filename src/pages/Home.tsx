@@ -1,5 +1,6 @@
 import axios from "axios";
 import { FC, useState, useEffect } from "react";
+import { Cateogory } from "../components/Category";
 import { ProductCard } from "../components/ProductCard";
 import {
   productI,
@@ -16,38 +17,30 @@ interface categoriesI {
 }
 
 export const Home: FC = () => {
-  const [productsData, setProductsData] = useState<productI[] | []>([]);
+  const [productsData, setProductsData] = useState<productI[] | null>(null);
   const { data = null, isLoading } = useFetchProductsQuery();
-  const [categories, setCategories] = useState<categoriesI[] | []>([]);
-  const [category, setCategory] = useState<string>("All");
+  // const [categories, setCategories] = useState<categoriesI[] | []>([]);
+  // const [category, setCategory] = useState<string>("All");
   useEffect(() => {
-    axios({
-      method: "get",
-      url: `https://upayments-studycase-api.herokuapp.com/api/categories/`,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => setCategories(res.data.categories))
-      .catch((e) => console.log(e));
-    FilterByCategory();
-  }, [category, data]);
 
-  const FilterByCategory = () => {
-    if (category == "All" && data) {
-      setProductsData(data.products);
-    } else if (data) {
-      setProductsData(
-        data.products.filter((product) => {
-          return product.category == category;
-        })
-      );
-    }
-  };
+  }, [productsData]);
+
+  // const FilterByCategory = () => {
+  //   if (category == "All" && data) {
+  //     setProductsData(data.products);
+  //   } else if (data) {
+  //     setProductsData(
+  //       data.products.filter((product) => {
+  //         return product.category === category;
+  //       })
+  //     );
+  //   }
+  // };
 
   return (
     <div className="">
-      <div className="p-2 md:pl-20 lg:pl-20  flex gap-3 border-b-8">
+      <Cateogory setProductsData={setProductsData} productData={data&&data.products} />
+      {/* <div className="p-2 md:pl-20 lg:pl-20  flex gap-3 border-b-8">
         <h3 className="text-base font-medium">Categories:</h3>
         <select
           onChange={(event) => setCategory(event.target.value)}
@@ -61,7 +54,7 @@ export const Home: FC = () => {
               </option>
             ))}
         </select>
-      </div>
+      </div> */}
 
       {isLoading ? (
         <h1>loading....</h1>

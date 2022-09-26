@@ -8,6 +8,7 @@ export const Navbar: FC = () => {
         {[
           ["Home", "/"],
           ["Favourite", "/favourite"],
+          ["Add Product", "/add/product"]
         ].map(([title, url]) => (
           <NavLink to={url} className="text-decoration-none" key={title}>
             <div className="rounded-none px-3 py-3 text-slate-100 font-medium hover:bg-slate-400 hover:text-slate-900">

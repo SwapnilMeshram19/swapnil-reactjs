@@ -18,9 +18,22 @@ export interface productI {
     updatedAt?: string,
     __v?: number
 }
+
+interface categoriesI {
+    _id: string;
+    name: string;
+    createdAt?: string;
+    updatedAt?: string;
+    __v?: number;
+  }
+  
 interface fetchProductsI {
     message: string,
     products: productI[]
+}
+interface fetchCategoryI{
+    message:string,
+    categories:categoriesI[]
 }
 interface fetchProductI {
     message: string,
@@ -47,9 +60,14 @@ export const apiSlice = createApi({
                 query(id) {
                     return `/products/${id}`;
                 }
+            }),
+            fetchCategory:builder.query<fetchCategoryI,void>({
+                query() {
+                    return `/categories/`;
+                }
             })
         }
     }
 })
 
-export const { useFetchProductQuery, useFetchProductsQuery } = apiSlice;
+export const { useFetchProductQuery, useFetchProductsQuery,useFetchCategoryQuery } = apiSlice;
