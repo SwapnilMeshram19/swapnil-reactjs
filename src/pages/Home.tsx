@@ -10,9 +10,9 @@ export const Home: FC = () => {
   const [productsData, setProductsData] = useState<productI[] | null>(null);
   const { data = null, isLoading } = useFetchProductsQuery();
 
-  useEffect(() => {
-    setProductsData(productsData);
-  }, [productsData]);
+  // useEffect(() => {
+    
+  // }, [productsData]);
 
   return (
     <div className="">

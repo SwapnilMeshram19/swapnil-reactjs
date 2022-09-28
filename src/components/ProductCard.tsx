@@ -9,12 +9,12 @@ import {
 
 export const ProductCard: FC<{ product: productI }> = ({ product }) => {
   const [available, setAvailable] = useState<boolean>(false);
-  const favouriteProduct = useAppSelector((state) => state.favourite);
+  const favouriteProduct = useAppSelector((state) => state.favourite.favourite);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (favouriteProduct) {
-      if (favouriteProduct.favourite.find((ele) => ele._id === product._id)) {
+      if (favouriteProduct.find((ele) => ele._id === product._id)) {
         setAvailable(!available);
       }
     }
@@ -22,6 +22,7 @@ export const ProductCard: FC<{ product: productI }> = ({ product }) => {
   // add to Favourite
   const handleAddFavourite = () => {
     dispatch(addFavourite(product));
+    console.log(favouriteProduct)
   };
 
   // remove from favourite
