@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { apiSlice} from '../features/product/productApiSlice';
+import { apiSlice } from '../features/product/productApiSlice';
 import favouritSlice from '../features/product/favouritSlice';
 import storage from 'redux-persist/es/storage';
 import { persistReducer, persistStore } from 'redux-persist';
