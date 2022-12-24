@@ -22,9 +22,9 @@ const rootReducer = combineReducers({
 const persistedReducer = persistReducer(persitConifg, rootReducer)
 export const store = configureStore({
     reducer: persistedReducer,
-    middleware: (getdefaultMiddleware) => {
+    middleware: (getDefaultMiddleware) => {
 
-        return getdefaultMiddleware().concat(apiSlice.middleware);
+        return getDefaultMiddleware().concat(apiSlice.middleware);
     }
 })
 

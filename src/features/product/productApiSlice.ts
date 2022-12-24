@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 
-export const token: string = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN3YXBuaWxtMTkwOEBnbWFpbC5jb20iLCJnaXRodWIiOiJodHRwczovL2dpdGh1Yi5jb20vU3dhcG5pbE1lc2hyYW0xOSIsImlhdCI6MTY2Mzk2MjMwMywiZXhwIjoxNjY0Mzk0MzAzfQ.rgU86kXWKxzV435_sAZtkLIFTwSNstXSHETG13vUGII";
+export const token: string = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjJtZW5hdmplZXRAZ21haWwuY29tIiwiZ2l0aHViIjoiaHR0cHM6Ly9naXRodWIuY29tL1RoYW5uenoiLCJpYXQiOjE2NjQ0NzAyNTgsImV4cCI6MTY2NDkwMjI1OH0.Uus4GLOJf8Wf3Pevc2FPcPtsXc-owwd1UcH1nh6MVro";
 
 
 
@@ -17,6 +17,8 @@ export interface productI {
     updatedAt?: string,
     __v?: number
 }
+
+const product:productI[]=[];
 export interface postProductI {
     _id?: string,
     name: string,
@@ -63,10 +65,12 @@ export const apiSlice = createApi({
     endpoints(builder) {
         return {
             //get products
-            fetchProducts: builder.query<fetchProductsI, void>({
-                query() {
+           fetchProducts: builder.query<fetchProductsI, void>({
+                
+            query() {
                     return '/products';
                 }
+
             }),
 
             //get product by id
@@ -86,6 +90,14 @@ export const apiSlice = createApi({
                     }
                 }
             }),
+
+            // deleteProduct: builder.mutation<fetchProductI, Partial<postProductI>>({
+            //     query(body) {
+            //         return {
+                       
+            //         }
+            //     }
+            // }),
 
 
             //get Category
